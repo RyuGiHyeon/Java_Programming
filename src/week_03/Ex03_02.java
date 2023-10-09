@@ -1,7 +1,7 @@
+package week_03;
 import java.util.Scanner;
 
-public class Main {
-
+public class Ex03_02 {
     public static void main(String[] args) {
         String course[] = {"객체지향", "프로그래밍", "알고리즘", "자료구조", "컴퓨터구조"};
         char score[] = {'A', 'B', 'B', 'C', 'D'};
@@ -31,6 +31,9 @@ public class Main {
                 case "종료":
                     System.out.println("종료합니다.");
                     System.exit(0);
+                default :
+                    System.out.println("잘못된 입력입니다.");
+                    break;
             }
         }
     }
