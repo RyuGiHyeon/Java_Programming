@@ -7,7 +7,15 @@ class SouthPanel extends JPanel{
     public SouthPanel(){
         Container a = new Container();
         a.setLayout(new FlowLayout());
-        a.add(new JLabel("수식입력")).setBackground(Color.GRAY);
+        JLabel label = new JLabel("수식입력");
+        label.setOpaque(true);  // JLabel에 대해 배경색 적용을 위해 추가
+        label.setBackground(Color.GRAY);
+        a.add(label);
+        this.add(a);
+//        Container a = new Container();
+//        a.setLayout(new FlowLayout());
+//        a.add(new JLabel("수식입력")).setBackground(Color.GRAY);
+        
     }
 }
 class CenterPanel extends JPanel{
@@ -26,18 +34,36 @@ class CenterPanel extends JPanel{
         b.add(new JButton("9"));
         b.add(new JButton("CE"));
         b.add(new JButton("계산"));
-        b.add(new JButton("+")).setBackground(Color.yellow);
-        b.add(new JButton("-")).setBackground(Color.yellow);
-        b.add(new JButton("x")).setBackground(Color.yellow);
-        b.add(new JButton("/")).setBackground(Color.yellow);
-
+//        b.add(new JButton("+"));.setBackground(Color.yellow);
+//        b.add(new JButton("-"));.setBackground(Color.yellow);
+//        b.add(new JButton("x"));.setBackground(Color.yellow);
+//        b.add(new JButton("/"));.setBackground(Color.yellow);
+        JButton plusButton = new JButton("+");
+        plusButton.setBackground(Color.yellow);
+        b.add(plusButton);
+        JButton minusButton = new JButton("-");
+        minusButton.setBackground(Color.yellow);
+        b.add(minusButton);
+        JButton multiplyButton = new JButton("x");
+        multiplyButton.setBackground(Color.yellow);
+        b.add(multiplyButton);
+        JButton divideButton = new JButton("/");
+        divideButton.setBackground(Color.yellow);
+        b.add(divideButton);
+        this.add(b);
     }
 }
 class NorthPanel extends JPanel{
     public NorthPanel(){
         Container c = new Container();
         c.setLayout(new FlowLayout());
-        c.add(new JLabel("계산 결과")).setBackground(Color.black);
+        //c.add(new JLabel("계산 결과")).setBackground(Color.black);
+        JLabel label = new JLabel("계산 결과");
+        label.setOpaque(true);  // JLabel에 대해 배경색 적용을 위해 추가
+        label.setBackground(Color.black);
+        label.setForeground(Color.white);
+        c.add(label);
+        this.add(c);
     }
 }
 
@@ -49,9 +75,9 @@ public class Challenge_06 extends JFrame{
 
         Container d = getContentPane();
         d.setLayout(new FlowLayout());
-        d.add(new NorthPanel());
-        d.add(new CenterPanel());
         d.add(new SouthPanel());
+        d.add(new CenterPanel());
+        d.add(new NorthPanel());
 
         //화면에 보이도록 설정
         frame.setContentPane(d);
