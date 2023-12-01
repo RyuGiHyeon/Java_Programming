@@ -19,12 +19,12 @@ class Circle{
         return Math.PI*radius;  //Math.PI = 3.14
     }
 }
-public class Ex_04_05 {
+public class Ex04_05 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Circle circle[] = new Circle[3];
         for (int i = 0; i< circle.length; i++){
-            System.out.printf("x, y, radius >>");
+            System.out.print("x, y, radius >>");
             double x = scanner.nextDouble();
             double y = scanner.nextDouble();
             int radius = scanner.nextInt();

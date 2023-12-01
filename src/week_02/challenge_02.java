@@ -2,7 +2,7 @@ package week_02;
 
 import java.util.Scanner;
 
-public class Challenge_01 {
+public class challenge_02 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("현재 시간을 입력하세요 (HH 형식) : ");

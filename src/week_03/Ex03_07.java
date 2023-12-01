@@ -7,10 +7,14 @@ public class Ex03_07 {
             System.out.println("명령행 인자가 없습니다.");
             return;
         }
-        else{
+        /*else{
             for (int i = 0; i < args.length; i++) {
                 sum += Integer.parseInt(args[i]);
             }
+        }
+         */
+        for (int i=0; i<args.length; i++){
+            sum = sum + Integer.parseInt(args[i]);
         }
         System.out.println(sum/args.length);
     }

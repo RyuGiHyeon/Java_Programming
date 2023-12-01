@@ -1,37 +1,87 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.text.ParseException;
+import java.util.StringTokenizer;
 
 public class Main {
 
-    public static void main(String[] args) {
-        String course[] = {"객체지향", "프로그래밍", "알고리즘", "자료구조", "컴퓨터구조"};
-        char score[] = {'A', 'B', 'B', 'C', 'D'};
-        Scanner sc = new Scanner(System.in);
-        int i = 0;
+    public static void main(String[] args) throws IOException, ParseException {
+        // TODO Auto-generated method stub
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); // 선언
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out)); // 선언
 
-        while (true) {
-            System.out.print("강의 이름을 입력하세요>>");
-            String c = sc.next();
-            i++;
-            switch (c) {
-                case "객체지향":
-                    System.out.printf("객체지향의 학점은 %s\n", score[0]);
-                    break;
-                case "프로그래밍":
-                    System.out.printf("프로그래밍의 학점은 %s\n", score[1]);
-                    break;
-                case "알고리즘":
-                    System.out.printf("알고리즘의 학점은 %s\n", score[2]);
-                    break;
-                case "자료구조":
-                    System.out.printf("자료구조의 학점은 %s\n", score[3]);
-                    break;
-                case "컴퓨터구조":
-                    System.out.printf("컴퓨터구조의 학점은 %s\n", score[4]);
-                    break;
-                case "종료":
-                    System.out.println("종료합니다.");
-                    System.exit(0);
+        int N = Integer.parseInt(br.readLine()); //가로세로 길이
+        int[][] intArr = new int[N][N]; //입력한 배열
+        int[][] mapArr = new int[N][N]; //누적 배열
+        char num; //입력된 값 분할
+        String str;
+        for(int i = 0; i<N; i++) {		//한줄 단위
+            str = br.readLine();
+
+            for(int j = 0; j<N; j++) {	//한칸 단위
+                num = (str.charAt(j));
+
+                if(num=='.') {			//. 이면 0으로 세팅
+                    intArr[i][j] = 0;
+                }else {
+                    intArr[i][j] = Character.getNumericValue(num); //int로 변환
+                }
+
+                //숫자 주위에 해당 숫자만큼 더해줌
+                //배열 범위를 넘어가지 않게 조건부여위
+                if(i-1>=0) {
+                    mapArr[i-1][j] 		= mapArr[i-1][j] 	+ intArr[i][j];
+
+                    if(j-1>=0) {
+                        mapArr[i-1][j-1] 	= mapArr[i-1][j-1] 	+ intArr[i][j];
+                    }
+                    if(j+1<N) {
+                        mapArr[i-1][j+1] 	= mapArr[i-1][j+1]	+ intArr[i][j];
+                    }
+                }
+
+                if(j+1<N) {
+                    mapArr[i][j+1] 		= mapArr[i][j+1] 	+ intArr[i][j];
+                }
+                if(j-1>=0) {
+                    mapArr[i][j-1] 		= mapArr[i][j-1] 	+ intArr[i][j];
+                }
+
+                if(i+1<N) {
+                    mapArr[i+1][j] 		= mapArr[i+1][j] 	+ intArr[i][j];
+                    if(j-1>=0) {
+                        mapArr[i+1][j-1] 	= mapArr[i+1][j-1] 	+ intArr[i][j];
+                    }
+                    if(j+1<N) {
+                        mapArr[i+1][j+1] 	= mapArr[i+1][j+1] 	+ intArr[i][j];
+                    }
+                }
             }
         }
+        int mapNum; //누적값 세팅용
+        int intNum; //* 표시용
+
+        for(int i = 0; i<N; i++) {		//한줄씩 작성
+            for(int j = 0; j<N; j++) {	//한칸씩 작성
+                mapNum=mapArr[i][j];	//누적값 조회
+                intNum=intArr[i][j];	//입력값 조회
+
+                if(intNum>0) {			//입력값이 존재하면 "*" 로 변환
+                    bw.write("*");
+                }else if(mapNum>=10) {	//누적값이 10 이상이면 "M"출력
+                    bw.write("M");
+                }else {					//누적값 출력
+                    bw.write(mapNum+"");
+                }
+            }
+            bw.write("\n");				//개행
+        }
+        bw.close();
+        br.close();
     }
 }
+
+//출처: https://gitseok.tistory.com/entry/백준-1996번-지뢰찾기-JAVA-알고리즘 [기록하는 개발자:티스토리]

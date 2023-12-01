@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Random;
 
-public class score_avg {
+public class challenge_03 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);       //입력
         Random random = new Random();                   //랜덤
