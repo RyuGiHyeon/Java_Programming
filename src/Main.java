@@ -9,7 +9,6 @@ import java.util.StringTokenizer;
 public class Main {
 
     public static void main(String[] args) throws IOException, ParseException {
-        // TODO Auto-generated method stub
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); // 선언
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out)); // 선언
 
