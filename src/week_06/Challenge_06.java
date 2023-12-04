@@ -3,84 +3,88 @@ package week_06;
 import javax.swing.*;
 import java.awt.*;
 
-class SouthPanel extends JPanel{
-    public SouthPanel(){
-        Container a = new Container();
-        a.setLayout(new FlowLayout());
-        JLabel label = new JLabel("수식입력");
-        label.setOpaque(true);  // JLabel에 대해 배경색 적용을 위해 추가
-        label.setBackground(Color.GRAY);
-        a.add(label);
-        this.add(a);
-//        Container a = new Container();
-//        a.setLayout(new FlowLayout());
-//        a.add(new JLabel("수식입력")).setBackground(Color.GRAY);
-        
-    }
-}
-class CenterPanel extends JPanel{
-    public CenterPanel(){
-        Container b = new Container();
-        b.setLayout(new GridLayout(4, 4,5,5));
-        b.add(new JButton("0"));
-        b.add(new JButton("1"));
-        b.add(new JButton("2"));
-        b.add(new JButton("3"));
-        b.add(new JButton("4"));
-        b.add(new JButton("5"));
-        b.add(new JButton("6"));
-        b.add(new JButton("7"));
-        b.add(new JButton("8"));
-        b.add(new JButton("9"));
-        b.add(new JButton("CE"));
-        b.add(new JButton("계산"));
-//        b.add(new JButton("+"));.setBackground(Color.yellow);
-//        b.add(new JButton("-"));.setBackground(Color.yellow);
-//        b.add(new JButton("x"));.setBackground(Color.yellow);
-//        b.add(new JButton("/"));.setBackground(Color.yellow);
-        JButton plusButton = new JButton("+");
-        plusButton.setBackground(Color.yellow);
-        b.add(plusButton);
-        JButton minusButton = new JButton("-");
-        minusButton.setBackground(Color.yellow);
-        b.add(minusButton);
-        JButton multiplyButton = new JButton("x");
-        multiplyButton.setBackground(Color.yellow);
-        b.add(multiplyButton);
-        JButton divideButton = new JButton("/");
-        divideButton.setBackground(Color.yellow);
-        b.add(divideButton);
-        this.add(b);
-    }
-}
+//내가 만든것.
 class NorthPanel extends JPanel{
     public NorthPanel(){
+        JLabel label = new JLabel("수식입력");
+        label.setLayout(new FlowLayout());      //JPanel이 디폴트로 FlowLayout이지만, 확실하게 하기 위해
+
+        //색깔 적용
+        label.setOpaque(true);  // label에 배경색 적용
+        label.setBackground(Color.LIGHT_GRAY);
+        label.setForeground(Color.BLACK);       //Default = black 이지만 확실하게
+
+        JTextField textField = new JTextField("                                    ");
+
+        this.add(label);
+        this.add(textField);
+    }
+}
+
+class CenterPanel extends JPanel{
+    public CenterPanel(){
+        //GridLayout 배치 관리자
+        String[] cal = {"0", "1", "2", "3",
+                "4", "5", "6", "7",
+                "8", "9", "CE", "계산",
+                "+", "-", "*", "/"};
+
         Container c = new Container();
-        c.setLayout(new FlowLayout());
-        //c.add(new JLabel("계산 결과")).setBackground(Color.black);
-        JLabel label = new JLabel("계산 결과");
-        label.setOpaque(true);  // JLabel에 대해 배경색 적용을 위해 추가
-        label.setBackground(Color.black);
-        label.setForeground(Color.white);
-        c.add(label);
+        c.setLayout(new GridLayout(4, 4,5,5));
+
+        JButton[] label = new JButton[16];
+        for (int i=0; i<16; i++){
+            label[i] = new JButton(cal[i]);
+            label[i].setOpaque(true);
+            if (i < 12){
+                label[i].setForeground(Color.cyan);
+            }
+            else {
+                label[i].setForeground(Color.yellow);
+            }
+            c.add(label[i]);
+        }
         this.add(c);
     }
 }
+
+class SouthPanel extends JPanel{
+    public SouthPanel(){
+        JLabel label = new JLabel("계산 결과");
+        label.setLayout(new FlowLayout());    //JPanel이 디폴트로 FlowLayout이지만, 확실하게 하기 위해
+
+        label.setOpaque(true);  // label에 배경색 적용
+        label.setBackground(Color.DARK_GRAY);
+        label.setForeground(Color.WHITE);
+        JTextField textField = new JTextField("                                    ");
+
+        this.add(label);
+        this.add(textField);
+    }
+}
+
 
 public class Challenge_06 extends JFrame{
     public Challenge_06(){
         JFrame frame = new JFrame("계산기 프레임");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(300, 300);
+        frame.setSize(330, 240);
 
-        Container d = getContentPane();
-        d.setLayout(new FlowLayout());
-        d.add(new SouthPanel());
-        d.add(new CenterPanel());
-        d.add(new NorthPanel());
+        Container c = getContentPane();
+        c.setLayout(new BorderLayout());  //컨텐트 팬은 디폴트로 BorderLayout 배치 관리자.
 
-        //화면에 보이도록 설정
-        frame.setContentPane(d);
+        NorthPanel north = new NorthPanel();
+        CenterPanel center = new CenterPanel();
+        SouthPanel south = new SouthPanel();
+
+        north.setBackground(Color.LIGHT_GRAY);
+        south.setBackground(Color.DARK_GRAY);
+
+        c.add(north, BorderLayout.NORTH);
+        c.add(center, BorderLayout.CENTER);
+        c.add(south, BorderLayout.SOUTH);
+
+        frame.setContentPane(c);
         frame.setVisible(true);
     }
     public static void main(String[] args){
